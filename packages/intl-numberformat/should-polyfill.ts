@@ -70,7 +70,7 @@ function supportedLocalesOf(locale?: string | string[]) {
   return Intl.NumberFormat.supportedLocalesOf(locales).length === locales.length
 }
 
-export function shouldPolyfill(locale = 'en'): string | undefined {
+export function shouldPolyfill(locale: string | string[] = 'en'): string | undefined {
   if (
     typeof Intl === 'undefined' ||
     !('NumberFormat' in Intl) ||
@@ -79,6 +79,6 @@ export function shouldPolyfill(locale = 'en'): string | undefined {
     onlySupportsEn() ||
     !supportedLocalesOf(locale)
   ) {
-    return locale ? match([locale], supportedLocales, 'en') : undefined
+    return locale ? match(Array.isArray(locale) ? locale : [locale], supportedLocales, 'en') : undefined
   }
 }

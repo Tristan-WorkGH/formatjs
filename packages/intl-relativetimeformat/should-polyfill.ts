@@ -25,12 +25,12 @@ function hasResolvedOptionsNumberingSystem(locale?: string | string[]) {
   }
 }
 
-export function shouldPolyfill(locale = 'en'): string | undefined {
+export function shouldPolyfill(locale: string | string[] = 'en'): string | undefined {
   if (
     !('RelativeTimeFormat' in Intl) ||
     !supportedLocalesOf(locale) ||
     !hasResolvedOptionsNumberingSystem(locale)
   ) {
-    return match([locale], supportedLocales, 'en')
+    return match(Array.isArray(locale) ? locale : [locale], supportedLocales, 'en')
   }
 }
